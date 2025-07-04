@@ -18,10 +18,10 @@ namespace Student_Web_API.Controllers
         private readonly IMapper _mapper;
         private readonly IStudent _studentService;
 
-        public StudentController(IMapper mapper, IStudent _studentService)
+        public StudentController(IMapper mapper, IStudent studentService)
         {
-            this._mapper = mapper;
-            this._studentService = _studentService;
+            _mapper = mapper;
+            _studentService = studentService;
         }
 
         [HttpGet("GetStudents")]
