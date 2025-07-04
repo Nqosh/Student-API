@@ -24,8 +24,7 @@ namespace Student_Web_API.Controllers
             this._studentService = _studentService;
         }
 
-        // GET: api/<StudentController>
-        [HttpGet("List")]
+        [HttpGet("GetStudents")]
         public async Task<IActionResult> GetStudents()
         {
             var students = await _studentService.GetAll();
@@ -36,15 +35,7 @@ namespace Student_Web_API.Controllers
             return Ok(studentsDto);
         }
 
-        // GET api/<StudentController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<StudentController>
-        [HttpPost("Create")]
+        [HttpPost("CreateStudent")]
         public async Task<IActionResult> Post([FromBody] StudentDto studentDto)
         {
             if (studentDto == null)
@@ -54,20 +45,13 @@ namespace Student_Web_API.Controllers
 
             if (!await _studentService.Create(student))
             {
-                ModelState.AddModelError("", $"Something went wrong when saving the record { student.Name }");
+                ModelState.AddModelError("", $"Something went wrong when saving the Student { student.Name }");
                 return StatusCode(StatusCodes.Status500InternalServerError, ModelState);
             }
             return Ok();
         }
 
-        // PUT api/<StudentController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<StudentController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteStudent")]
         public async Task<IActionResult> Delete(int id)
         {
             if (!await _studentService.Exists(id))
@@ -75,7 +59,7 @@ namespace Student_Web_API.Controllers
 
             if (!await this._studentService.Delete(id))
             {
-                ModelState.AddModelError("", $"Something went wrong when deleting the record { id }");
+                ModelState.AddModelError("", $"Something went wrong when deleting the student { id }");
                 return StatusCode(StatusCodes.Status500InternalServerError, ModelState);
             }
             return Ok();

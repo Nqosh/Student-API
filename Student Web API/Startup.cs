@@ -50,13 +50,6 @@ namespace Student_Web_API
 
             services.AddSwaggerGen();
 
-            //services.AddSwaggerGen(options =>
-            //{
-            //    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            //    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
-
-            //});
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Student.API", Version = "v1" });
